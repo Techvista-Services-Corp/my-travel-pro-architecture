@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>My Travel Pro - Interactive Architecture Workshop</title>
+<style>
+:root{--navy:#17365D;--blue:#2F5597;--light:#eef4fb;--gold:#f2c14e;--green:#dff2e1;--red:#fde7e7;--ink:#1d2733;}
+*{box-sizing:border-box} body{font-family:Arial,Helvetica,sans-serif;margin:0;color:var(--ink);background:#f6f8fb}
+header{background:linear-gradient(120deg,var(--navy),var(--blue));color:white;padding:26px 34px}
+header h1{margin:0 0 6px;font-size:30px} header p{margin:0;opacity:.9}
+nav{position:sticky;top:0;background:white;border-bottom:1px solid #ddd;padding:10px 24px;z-index:5}
+nav button{border:0;background:#edf2f8;padding:10px 14px;margin:3px;border-radius:8px;cursor:pointer;font-weight:700}
+nav button.active{background:var(--blue);color:white}
+main{max-width:1250px;margin:auto;padding:24px} .tab{display:none} .tab.active{display:block}
+.card{background:white;border:1px solid #dde4ec;border-radius:12px;padding:18px;margin:14px 0;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.node{background:var(--light);border-left:5px solid var(--blue);padding:14px;border-radius:9px}
+.arrow{text-align:center;font-size:24px;color:var(--blue);font-weight:bold}
+.flow{display:flex;gap:8px;flex-wrap:wrap;align-items:center} .step{background:white;border:2px solid var(--blue);padding:12px;border-radius:10px;min-width:120px;text-align:center;font-weight:700}
+.agent{border-top:5px solid var(--gold)} table{width:100%;border-collapse:collapse;background:white} th,td{border:1px solid #d9e0e8;padding:8px;vertical-align:top} th{background:var(--blue);color:white;position:sticky;top:58px}
+input,textarea,select{width:100%;padding:7px;border:1px solid #bcc7d4;border-radius:6px} input[type=number]{min-width:85px}
+.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px} .metric{background:var(--navy);color:white;padding:18px;border-radius:10px;text-align:center} .metric b{font-size:25px;display:block}
+.check{display:flex;gap:10px;align-items:flex-start;margin:9px 0} .check input{width:auto;margin-top:4px}
+.badge{display:inline-block;padding:4px 8px;border-radius:999px;background:#e7eef8;font-size:12px;font-weight:bold}
+.small{font-size:12px;color:#5d6875} .callout{background:#fff7dc;border-left:5px solid var(--gold);padding:14px;border-radius:8px}
+button.action{background:var(--blue);color:white;border:0;padding:10px 14px;border-radius:8px;cursor:pointer;font-weight:bold}
+@media(max-width:700px){.summary{grid-template-columns:1fr} th{position:static}}
+</style>
+</head>
+<body>
+<header><h1>My Travel Pro - Interactive Architecture Workshop</h1><p>Techvista internal team tool • Use Todd's architecture as the source of truth • Enter estimates and assumptions live during the meeting</p></header>
+<nav id="nav">
+<button onclick="showTab('north',this)" class="active">North Star</button>
+<button onclick="showTab('flow',this)">User Flow</button>
+<button onclick="showTab('arch',this)">Architecture</button>
+<button onclick="showTab('agents',this)">AI Agents</button>
+<button onclick="showTab('estimate',this)">Estimation Lab</button>
+<button onclick="showTab('questions',this)">Todd Questions</button>
+</nav>
+<main>
+<section id="north" class="tab active">
+<div class="card"><h2>Product North Star</h2><p><b>My Travel Pro is an AI-powered digital travel planning and coordination platform that progressively converts traveler ideas, preferences, collaboration, bookings and experiences into a living, professional Travel Portfolio.</b></p>
+<div class="callout"><b>Team rule:</b> We are not redesigning Todd's product for estimation. We are translating his documented vision into buildable services, integrations, AI workflows, infrastructure and effort.</div></div>
+<div class="grid">
+<div class="node"><b>Central Product Artifact</b><br>Travel Portfolio - continuously updated, not just a final PDF.</div>
+<div class="node"><b>Agent Workflow</b><br>Interpret → Retrieve → Plan → Validate → Write.</div>
+<div class="node"><b>State Model</b><br>User → Trip → Portfolio.</div>
+<div class="node"><b>V1 Principle</b><br>One primary external provider per capability unless Todd requires more.</div>
+</div>
+</section>
+
+<section id="flow" class="tab">
+<div class="card"><h2>End-to-End User Journey</h2><div class="flow">
+<div class="step">1. Landing</div><div class="arrow">→</div><div class="step">2. Trip Overview</div><div class="arrow">→</div><div class="step">3. Portfolio Preview</div><div class="arrow">→</div><div class="step">4. Social Login &amp; Profile</div><div class="arrow">→</div><div class="step">5. Trip Specifics &amp; Refinement</div><div class="arrow">→</div><div class="step">6. Day-by-Day Itinerary</div><div class="arrow">→</div><div class="step">7. Collaboration &amp; Booking</div><div class="arrow">→</div><div class="step">8. Travel Journal / Final Portfolio</div>
+</div></div>
+<div class="grid">
+<div class="card"><h3>Trip Overview / Free Experience</h3><p>Anonymous trip creation; destination/dates/travelers/objective/mode/budget; validation; initial AI run; first Portfolio pages.</p></div><div class="card"><h3>Travel Portfolio Engine</h3><p>Structured Portfolio model; web rendering; PDF/export/share; cover, glance, calendar, attractions, daily pages, maps/weather, reservations, journal.</p></div><div class="card"><h3>Identity &amp; Traveler Profile</h3><p>Google/Apple/Meta login; user profile; travel profile; persistent preferences; home airport; pace; lodging/meal/transport/accessibility preferences.</p></div><div class="card"><h3>Trip Specifics</h3><p>Traveler roster, roles, trip-specific constraints, must-see/avoid, lodging/transport preferences, accessibility and collaboration permissions.</p></div><div class="card"><h3>Day-by-Day Planning</h3><p>Morning/afternoon/evening blocks; activities; meals; travel times; nudges; budget; maps/weather; BOOKED/FLEXIBLE/TRAVEL states.</p></div><div class="card"><h3>Collaboration</h3><p>Invites, roles, comments, voting, opt-in/out, activity feed, permissions, notifications.</p></div><div class="card"><h3>Booking &amp; Calendar</h3><p>Email/PDF/manual booking ingestion; confirmation; duplicate/conflict detection; calendar events; portfolio updates; partner punch-out where applicable.</p></div><div class="card"><h3>Travel Journal</h3><p>Photos, stories, tags, privacy, trip memory capture and Portfolio integration.</p></div>
+</div>
+</section>
+
+<section id="arch" class="tab">
+<div class="card"><h2>Logical Solution Architecture</h2>
+<div class="node"><h3>Experience / UI</h3><p>Landing, Trip Overview, Portfolio Preview, Profile, Trip Refinement, Day-by-Day, Collaboration, Booking, Journal, Portfolio</p></div><div class="arrow">↓</div><div class="node"><h3>API / Application</h3><p>Trip, Profile, Planning, Activity, Collaboration, Booking, Calendar, Portfolio, Journal, Notification, Authentication, Subscription</p></div><div class="arrow">↓</div><div class="node"><h3>AI Orchestration</h3><p>Interpretation → Retrieval → Planning → Validation → Portfolio Writer</p></div><div class="arrow">↓</div><div class="node"><h3>Data</h3><p>User, Travel Profile, Trip, Travelers, Activities, Itinerary, Budget, Bookings, Collaboration, Journal, Portfolio, Agent Runs, External Data Cache</p></div><div class="arrow">↓</div><div class="node"><h3>Integration</h3><p>Places/Attractions, Weather, Maps/Routes, Flights, Lodging, Events, Calendar, Social Login, Email, Booking Partners</p></div><div class="arrow">↓</div>
+<div class="node"><h3>Platform / Cloud</h3><p>API Gateway, compute, database, object storage, queues/jobs, secrets, monitoring/logging, CI/CD, security</p></div>
+</div>
+<div class="card"><h2>Proposed Techvista Cloud Topology</h2>
+<div class="flow"><div class="step">Users</div><div class="arrow">→</div><div class="step">CDN / Load Balancer</div><div class="arrow">→</div><div class="step">API Gateway</div><div class="arrow">→</div><div class="step">Application Services</div><div class="arrow">→</div><div class="step">Data / Storage</div></div>
+<div class="grid" style="margin-top:15px"><div class="node">AI Orchestrator / LLM</div><div class="node">External Travel APIs</div><div class="node">Async Jobs / Queues</div><div class="node">Secrets / Monitoring / CI-CD</div></div>
+<p class="small">This cloud topology is a Techvista implementation recommendation, not a Todd-mandated service topology.</p></div>
+</section>
+
+<section id="agents" class="tab">
+<div class="card"><h2>AI Orchestration</h2><div class="flow"><div class="step">Interpret</div><div class="arrow">→</div><div class="step">Retrieve</div><div class="arrow">→</div><div class="step">Plan</div><div class="arrow">→</div><div class="step">Validate</div><div class="arrow">→</div><div class="step">Write</div></div></div>
+<div class="grid">
+<div class="card agent"><h3>1. Interpretation Agent</h3><p>Reads user inputs; builds intent and traveler preference models; identifies constraints and budget context.</p><span class="badge">Output</span><p>Structured intent / preference / constraint model</p></div><div class="card agent"><h3>2. Retrieval Agent</h3><p>Fetches destination data, logistics, weather, travel times, lodging/flight options, attractions/events/local favorites.</p><span class="badge">Output</span><p>Destination / logistics / weather / travel knowledge packs</p></div><div class="card agent"><h3>3. Planning Agent</h3><p>Builds day blocks; assigns activities, meals, travel time, nudges, budget alignment and group logic.</p><span class="badge">Output</span><p>Draft itinerary plan</p></div><div class="card agent"><h3>4. Validation Agent</h3><p>Checks feasibility, conflicts, pacing, budget, weather and logistics; proposes corrections.</p><span class="badge">Output</span><p>Validated itinerary + conflicts + recommended adjustments</p></div><div class="card agent"><h3>5. Portfolio Writer Agent</h3><p>Writes/formats Portfolio cover, trip-at-a-glance, calendar, attractions, daily itinerary and journal pages.</p><span class="badge">Output</span><p>Portfolio documentation model + rendered Travel Portfolio</p></div>
+</div></section>
+
+<section id="estimate" class="tab">
+<div class="card"><h2>Live Estimation Lab</h2><p>Enter Low / Expected / High hours during the team call. Totals update automatically. Notes are stored in your browser for this file.</p>
+<div class="summary"><div class="metric">Low Total<b id="lowTotal">0</b>hours</div><div class="metric">Expected Total<b id="expTotal">0</b>hours</div><div class="metric">High Total<b id="highTotal">0</b>hours</div></div></div>
+<div class="card" style="overflow:auto"><table><thead><tr><th>#</th><th>Workstream</th><th>Low</th><th>Expected</th><th>High</th><th>Owner</th><th>Dependencies / Assumptions</th></tr></thead><tbody id="estBody"></tbody></table></div>
+<div class="card"><button class="action" onclick="exportCSV()">Export Estimation CSV</button> <button class="action" onclick="clearData()">Clear Saved Inputs</button></div>
+</section>
+
+<section id="questions" class="tab">
+<div class="card"><h2>Architecture-Impacting Questions for Todd</h2><p>Use these only after the team review. Check questions that are already resolved.</p>
+<label class="check"><input type="checkbox" class="qcheck"><span>Is V1 responsive web only, or are native iOS/Android apps expected?</span></label><label class="check"><input type="checkbox" class="qcheck"><span>Which flight, lodging, attractions/events, maps and weather providers are mandatory for V1?</span></label><label class="check"><input type="checkbox" class="qcheck"><span>Is booking primarily search/punch-out/ingestion, or must My Travel Pro execute transactions directly?</span></label><label class="check"><input type="checkbox" class="qcheck"><span>Which calendars are required in V1: Google only, or Google + Microsoft + Apple?</span></label><label class="check"><input type="checkbox" class="qcheck"><span>Is collaboration asynchronous (comments/voting/updates) or true real-time simultaneous editing?</span></label><label class="check"><input type="checkbox" class="qcheck"><span>Does V1 require payment/subscription processing for the free-to-paid transition?</span></label><label class="check"><input type="checkbox" class="qcheck"><span>Is Travel Agent Concierge part of the initial production release or a future roadmap item?</span></label>
+</div>
+<div class="card"><h2>Internal Review Checklist</h2>
+<label class="check"><input type="checkbox"><span>Portfolio is understood as the central evolving product artifact.</span></label><label class="check"><input type="checkbox"><span>Five-agent workflow is understood and technically feasible.</span></label><label class="check"><input type="checkbox"><span>Each product module has a technical owner.</span></label><label class="check"><input type="checkbox"><span>V1 external provider assumptions are documented.</span></label><label class="check"><input type="checkbox"><span>Booking model assumption is documented.</span></label><label class="check"><input type="checkbox"><span>Low / Expected / High hours are entered for every workstream.</span></label><label class="check"><input type="checkbox"><span>Infrastructure and third-party costs are reviewed separately.</span></label><label class="check"><input type="checkbox"><span>Only material clarification questions will be sent to Todd.</span></label>
+</div></section>
+</main>
+<script>
+const workstreams = [{"name": "Requirements validation / architecture", "low": "", "expected": "", "high": "", "owner": "", "notes": ""}, {"name": "UX/UI implementation", "low": "", "expected": "", "high": "", "owner": "", "notes": ""}, {"name": "Trip Overview / free experience", "low": "", "expected": "", "high": "", "owner": "", "notes": ""}, {"name": "Authentication / User & Travel Profile", "low": "", "expected": "", "high": "", "owner": "", "notes": ""}, {"name": "Trip Specifics", "low": "", "expected": "", "high": "", "owner": "", "notes": ""}, {"name": "AI Agent framework", "low": "", "expected": "", "high": "", "owner": "", "notes": ""}, {"name": "Retrieval & external APIs", "low": "", "expected": "", "high": "", "owner": "", "notes": ""}, {"name": "Day-by-Day Planning", "low": "", "expected": "", "high": "", "owner": "", "notes": ""}, {"name": "Validation / conflict engine", "low": "", "expected": "", "high": "", "owner": "", "notes": ""}, {"name": "Maps / weather / logistics", "low": "", "expected": "", "high": "", "owner": "", "notes": ""}, {"name": "Budget engine", "low": "", "expected": "", "high": "", "owner": "", "notes": ""}, {"name": "Collaboration", "low": "", "expected": "", "high": "", "owner": "", "notes": ""}, {"name": "Booking ingestion", "low": "", "expected": "", "high": "", "owner": "", "notes": ""}, {"name": "Calendar integration", "low": "", "expected": "", "high": "", "owner": "", "notes": ""}, {"name": "Travel Portfolio engine", "low": "", "expected": "", "high": "", "owner": "", "notes": ""}, {"name": "PDF / export / sharing", "low": "", "expected": "", "high": "", "owner": "", "notes": ""}, {"name": "Travel Journal", "low": "", "expected": "", "high": "", "owner": "", "notes": ""}, {"name": "Notifications", "low": "", "expected": "", "high": "", "owner": "", "notes": ""}, {"name": "API Gateway / security", "low": "", "expected": "", "high": "", "owner": "", "notes": ""}, {"name": "Cloud / DevOps", "low": "", "expected": "", "high": "", "owner": "", "notes": ""}, {"name": "QA / AI validation", "low": "", "expected": "", "high": "", "owner": "", "notes": ""}, {"name": "UAT / deployment", "low": "", "expected": "", "high": "", "owner": "", "notes": ""}, {"name": "PM / BA", "low": "", "expected": "", "high": "", "owner": "", "notes": ""}];
+function showTab(id,btn){document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));btn.classList.add('active')}
+function loadData(){let saved={};try{saved=JSON.parse(localStorage.getItem('mtp_est')||'{}')}catch(e){}; const b=document.getElementById('estBody'); b.innerHTML='';
+workstreams.forEach((w,i)=>{let d=saved[i]||w; let tr=document.createElement('tr'); tr.innerHTML=`<td>${i+1}</td><td><b>${w.name}</b></td><td><input type="number" min="0" data-i="${i}" data-k="low" value="${d.low||''}"></td><td><input type="number" min="0" data-i="${i}" data-k="expected" value="${d.expected||''}"></td><td><input type="number" min="0" data-i="${i}" data-k="high" value="${d.high||''}"></td><td><input data-i="${i}" data-k="owner" value="${d.owner||''}"></td><td><textarea data-i="${i}" data-k="notes">${d.notes||''}</textarea></td>`;b.appendChild(tr)}); document.querySelectorAll('#estBody input,#estBody textarea').forEach(x=>x.addEventListener('input',saveData)); calc();}
+function saveData(){let d={};document.querySelectorAll('#estBody [data-i]').forEach(x=>{let i=x.dataset.i,k=x.dataset.k;d[i]=d[i]||{name:workstreams[i].name};d[i][k]=x.value});localStorage.setItem('mtp_est',JSON.stringify(d));calc()}
+function calc(){let sums={low:0,expected:0,high:0};document.querySelectorAll('#estBody input[type=number]').forEach(x=>sums[x.dataset.k]+=Number(x.value||0));document.getElementById('lowTotal').textContent=sums.low.toLocaleString();document.getElementById('expTotal').textContent=sums.expected.toLocaleString();document.getElementById('highTotal').textContent=sums.high.toLocaleString();}
+function exportCSV(){let rows=[['#','Workstream','Low','Expected','High','Owner','Dependencies / Assumptions']];document.querySelectorAll('#estBody tr').forEach((tr,i)=>{let vals=[i+1,workstreams[i].name];['low','expected','high','owner','notes'].forEach(k=>{let el=tr.querySelector(`[data-k="${k}"]`);vals.push(el?el.value:'')});rows.push(vals)});let csv=rows.map(r=>r.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(',')).join('\n');let blob=new Blob([csv],{type:'text/csv'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='My_Travel_Pro_Team_Estimate.csv';a.click();}
+function clearData(){if(confirm('Clear all saved estimation inputs?')){localStorage.removeItem('mtp_est');loadData()}}
+loadData();
+</script>
+</body></html>
